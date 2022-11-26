@@ -39,14 +39,14 @@ public class BookService {
 
 	public float checkout(String[] bookNames, String promo) {
 		float totalAmount = 0;
-
+		String type = "fiction";
 		for (String bookName : bookNames) {
 
 			List<Book> books = bookRepository.findByBookName(bookName);
 			for (Book book : books) {
 				System.out.println("Book Name: " + book.getBookName());
 				System.out.println(book.getBookName() + " - " + book.getPrice());
-				if (promo.contains("fiction") && book.getType().equalsIgnoreCase("Fiction")) {
+				if (promo.contains(type) && book.getType().equalsIgnoreCase(type)) {
 					totalAmount += (book.getPrice() - (book.getPrice() * 10 / 100));
 				} else {
 					totalAmount += book.getPrice();
